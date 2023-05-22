@@ -55,6 +55,10 @@ router.delete(
   //     .catch((err) => res.send(err));
   // }
 );
+router.post(
+  "/update-blog/:id",
+  blogController.blog_update
+);
 router.get(
   "/create-blog",
   blogController.blog_create_view

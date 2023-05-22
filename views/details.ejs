@@ -14,7 +14,38 @@
     <h1><%= blog.snippet %></h1>
     <h1><%= blog.body %></h1>
     <a data-doc="<%= blog._id %>" class="delete"
-      ><img src="/images/trash.png"></a>
+      ><img src="/images/trash.png"
+    /></a>
+    <button class="update-show">Update</button>
+    <br />
+    <form
+      action="/update-blog/<%= blog._id %>"
+      method="POST"
+      class="displayNone"
+    >
+      <div>
+        <input
+          type="'text"
+          placeholder="blog title"
+          name="title"
+          value="<%= blog.title %>"
+        />
+      </div>
+      <div>
+        <input
+          type="'text"
+          placeholder="blog snippet"
+          name="snippet"
+          value="<%= blog.snippet %>"
+        />
+      </div>
+      <div>
+        <textarea type="'text" placeholder="blog body" name="body">
+          <%= blog.body %>
+        </textarea>
+      </div>
+      <a><button type="submit">Update</button></a>
+    </form>
     <script>
       const trash = document.querySelector("a.delete");
       trash.addEventListener("click", (e) => {
@@ -23,6 +54,14 @@
           .then((res) => res.json())
           .then((data) => (window.location.href = data.redirect))
           .catch((err) => console.log(err));
+      });
+      //update
+      const update_show = document.querySelector("button.update-show");
+      update_show.addEventListener("click", () => {
+        const form = document.querySelector("form");
+        form.classList.remove("displayNone");
+        update_show.classList.add("displayNone");
+        form.classList.add("displayBlock");
       });
     </script>
   </body>

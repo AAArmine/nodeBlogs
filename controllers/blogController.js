@@ -43,10 +43,25 @@ const blog_delete = (req, res) => {
     .catch((err) => res.send(err));
 };
 
+const blog_update = (req, res) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+  console.log("updated data", updatedData);
+  Blog.findByIdAndUpdate(id, updatedData, { new: true })
+    .then((updatedBlog) => {
+      if (updatedBlog) {
+        res.redirect("/");
+      } else {
+        res.status(404).json({ error: "Blog not found" });
+      }
+    })
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 module.exports = {
   blog_index,
   blog_add,
   blog_details,
   blog_create_view,
   blog_delete,
+  blog_update,
 };

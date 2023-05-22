@@ -1,3 +1,9 @@
 img {
   width: 50px;
 }
+.displayNone {
+  display: none;
+}
+.displayBlock {
+  display: block;
+}
